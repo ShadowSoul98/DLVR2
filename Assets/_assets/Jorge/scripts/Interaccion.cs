@@ -8,3 +8,8 @@ public interface Interaccion
     void Interact(PlayerTemp Player);
 }
 
+public interface InteraccionKey
+{
+    void InterKey(PlayerTemp Player);
+}
+
