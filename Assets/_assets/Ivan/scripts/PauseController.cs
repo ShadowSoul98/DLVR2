@@ -14,8 +14,8 @@ public class PauseController : MonoBehaviour
     {
         if (OVRInput.GetUp(OVRInput.RawButton.Start))
         {
-            PauseCanvas.SetActive(!PauseCanvas.active);
-            Debug.Log("Press start: " + PauseCanvas.active);
+            PauseCanvas.SetActive(!PauseCanvas.activeSelf);
+            Debug.Log("Press start: " + PauseCanvas.activeSelf);
         }
     }
     public void ExitBtn()
