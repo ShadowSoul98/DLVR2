@@ -10,25 +10,27 @@ public class Login : MonoBehaviour
 {
     public server server;
     public playerProfile playerProfile;
-    public TMP_InputField name;
+    public TMP_InputField username;
     public TMP_InputField password;
     public GameObject imLoading;
     public TextMeshProUGUI errorText;
+    public bool first = false;
 
-    public void SesionStart()
+    public void InicioPartida()
     {
-        StartCoroutine(Start());
+        StartCoroutine(Inicio());
     }
-    IEnumerator Start()
+    IEnumerator Inicio()
     {
         imLoading.SetActive(true);
         string[] data = new string[2];
-        data[0] = name.text;
+        data[0] = username.text;
         data[1] = password.text;
+        Debug.Log(2);
         StartCoroutine(server.ServiceConsum("login", data, PosLoader));
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.15f);
         yield return new WaitUntil(() => !server.busy);
-        imLoading.SetActive(false);
+        //imLoading.SetActive(false);
     }
 
     public void PosLoader()
@@ -36,13 +38,23 @@ public class Login : MonoBehaviour
         switch (server.response.codigo)
         {
             case 204:
-                errorText.text = "Usuario o contrasena son incorrectos";
-                print("Usuario o contrasena son incorrectos");
-                break;
+                if (first)
+                {
+                    Debug.Log(1);
+                    errorText.text = "Usuario o contrasena son incorrectos";
+                    imLoading.SetActive(true);
+                    //print("Usuario o contrasena son incorrectos");
+                }
+                else
+                {
+                    first = true;
+                    imLoading.SetActive(false);
+                }
+                    break;
             case 205:
-                //SceneManager.LoadScene(1);
                 playerProfile.DBuser = JsonUtility.FromJson<DBUser>(server.response.respuesta);
-                errorText.text = playerProfile.DBuser.name;
+                errorText.text = "Bienvenido "+playerProfile.DBuser.name;
+                SceneManager.LoadScene(1);
                 break;
             case 402:
                 errorText.text = "Error datos faltantes";
