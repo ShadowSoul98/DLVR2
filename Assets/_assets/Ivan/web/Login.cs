@@ -10,11 +10,10 @@ public class Login : MonoBehaviour
 {
     public server server;
     public playerProfile playerProfile;
-    public TMP_InputField username;
-    public TMP_InputField password;
+    public InputField userInput;
+    public InputField passwordInput;
     public GameObject imLoading;
     public TextMeshProUGUI errorText;
-    public bool first = false;
 
     public void InicioPartida()
     {
@@ -24,9 +23,10 @@ public class Login : MonoBehaviour
     {
         imLoading.SetActive(true);
         string[] data = new string[2];
-        data[0] = username.text;
-        data[1] = password.text;
-        Debug.Log(2);
+        data[0] = userInput.text;
+        data[1] = passwordInput.text;
+        Debug.Log(userInput.text+": "+data[0]);
+        Debug.Log(passwordInput.text + ": " + data[1]);
         StartCoroutine(server.ServiceConsum("login", data, PosLoader));
         yield return new WaitForSeconds(0.15f);
         yield return new WaitUntil(() => !server.busy);
@@ -38,18 +38,10 @@ public class Login : MonoBehaviour
         switch (server.response.codigo)
         {
             case 204:
-                if (first)
-                {
                     Debug.Log(1);
                     errorText.text = "Usuario o contrasena son incorrectos";
                     imLoading.SetActive(true);
                     //print("Usuario o contrasena son incorrectos");
-                }
-                else
-                {
-                    first = true;
-                    imLoading.SetActive(false);
-                }
                     break;
             case 205:
                 playerProfile.DBuser = JsonUtility.FromJson<DBUser>(server.response.respuesta);
