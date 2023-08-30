@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ed9e4a595502a40856dbff4f236959, type: 3}
   m_Name: Server
   m_EditorClassIdentifier: Assembly-CSharp::login
-  servidor: http://localhost/testunity
+  servidor: https://hectorsnightmares.000webhostapp.com/api-unity
   services:
   - name: check
     url: check.php
@@ -20,10 +20,10 @@ MonoBehaviour:
   - name: login
     url: login.php
     parameters:
-    - user
-    - pass
+    - name
+    - password
   busy: 0
   response:
     codigo: 205
     mensaje: Inicio de sesion correcta
-    respuesta: '{"id":1,"user":"1","pass":"1","imguser":"6999862.png","level":1}'
+    respuesta: '{"id":3,"name":"1","password":"1","imguser":"","level":1}'

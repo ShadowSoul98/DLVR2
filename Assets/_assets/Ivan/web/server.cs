@@ -23,7 +23,6 @@ public class server : ScriptableObject
 
         for (int i = 0; i < services.Length; i++)
         {
-            //Debug.Log(services[i].name);
             if (services[i].name.Equals(name))
             {
                 s = services[i];
@@ -34,12 +33,10 @@ public class server : ScriptableObject
             form.AddField(s.parameters[i], data[i]);
         }
         UnityWebRequest www = UnityWebRequest.Post(servidor + "/" + s.url, form);
-        //Debug.Log(servidor + "/" + s.url);
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success) 
         {
-            //no cargo el usuario
             response = new Respuesta();
         }
         else

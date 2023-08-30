@@ -9,11 +9,12 @@ using UnityEngine.UI;
 public class Login : MonoBehaviour
 {
     public server server;
-    public TMP_InputField user;
-    public TMP_InputField pass;
+    public playerProfile playerProfile;
+    public TMP_InputField name;
+    public TMP_InputField password;
     public GameObject imLoading;
-    public DBUser DBuser;
-    // Start is called before the first frame update
+    public TextMeshProUGUI errorText;
+
     public void SesionStart()
     {
         StartCoroutine(Start());
@@ -22,9 +23,8 @@ public class Login : MonoBehaviour
     {
         imLoading.SetActive(true);
         string[] data = new string[2];
-        data[0] = user.text;
-        data[1] = pass.text;
-        //Debug.Log(user.text+ " " +pass.text);
+        data[0] = name.text;
+        data[1] = password.text;
         StartCoroutine(server.ServiceConsum("login", data, PosLoader));
         yield return new WaitForSeconds(0.5f);
         yield return new WaitUntil(() => !server.busy);
@@ -36,32 +36,23 @@ public class Login : MonoBehaviour
         switch (server.response.codigo)
         {
             case 204:
+                errorText.text = "Usuario o contrasena son incorrectos";
                 print("Usuario o contrasena son incorrectos");
                 break;
             case 205:
                 //SceneManager.LoadScene(1);
-                Debug.Log(server.response.respuesta);
-                DBuser = JsonUtility.FromJson<DBUser>(server.response.respuesta);
+                playerProfile.DBuser = JsonUtility.FromJson<DBUser>(server.response.respuesta);
+                errorText.text = playerProfile.DBuser.name;
                 break;
             case 402:
-                print("Usuario o contrasena son incorrectos");
+                errorText.text = "Error datos faltantes";
                 break;
             case 404:
 
-                print("No se puede conectar con el servidor");
+                errorText.text = "No se puede conectar con el servidor";
                 break;
             default:
                 break;
         }
     }
-}
-
-[Serializable]
-public class DBUser
-{
-    public int id;
-    public string user;
-    public string pass;
-    public string imguser;
-    public string level;
 }
