@@ -16,10 +16,10 @@ public class pauseProfile : MonoBehaviour
     [System.Obsolete]
     void Start()
     {
-        nameProfile.text = profile.DBuser.name;
+        profile = GameObject.FindGameObjectWithTag("userData").GetComponent<playerProfile>();
+        nameProfile.text = profile.DBuser.username;
         imageUrl = profile.DBuser.imguser;
         StartCoroutine(GetTextures());
-     
     }
 
     [System.Obsolete]

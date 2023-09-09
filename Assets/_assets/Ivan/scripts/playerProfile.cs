@@ -15,7 +15,11 @@ public class playerProfile : MonoBehaviour
 
     public void SetUserName(string name)
     {
-        textMeshPro.text = DBuser.name;
+        textMeshPro.text = DBuser.username;
+    }
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
     }
 }
 
@@ -23,7 +27,7 @@ public class playerProfile : MonoBehaviour
 public class DBUser
 {
     public int id;
-    public string name;
+    public string username;
     public string password;
     public string imguser;
     public string level;

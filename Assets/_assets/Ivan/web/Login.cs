@@ -45,7 +45,7 @@ public class Login : MonoBehaviour
                     break;
             case 205:
                 playerProfile.DBuser = JsonUtility.FromJson<DBUser>(server.response.respuesta);
-                errorText.text = "Bienvenido "+playerProfile.DBuser.name;
+                errorText.text = "Bienvenido "+playerProfile.DBuser.username;
                 SceneManager.LoadScene(1);
                 break;
             case 402:
