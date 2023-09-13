@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class enemyController : MonoBehaviour
 {
     public Transform Objetive;
+    public Transform start;
     public GameObject enemy;
     public float Speed = 0f;
     public NavMeshAgent Agent;
@@ -18,13 +19,16 @@ public class enemyController : MonoBehaviour
 
         Agent.speed = Speed;
         Agent.SetDestination(Objetive.position);
+        if (!Agent.pathPending && Agent.remainingDistance <= Agent.stoppingDistance){
+            enemy.SetActive(false);
+        }
     }
     public void Moved(){
-        Debug.Log("enemigo detectado");
         Speed = 20f;
     }
     public void Stalkered(){
         enemy.SetActive(true);
+        enemy.transform.position = start.position;
     }
     void OnTriggerEnter(Collider other)
     {
