@@ -7,6 +7,10 @@ TagManager:
   - Floor
   - InstaKill
   - userData
+  - tag1
+  - tag7
+  - tag9
+  - tag2
   layers:
   - Default
   - TransparentFX
