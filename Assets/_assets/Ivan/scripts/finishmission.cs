@@ -13,6 +13,7 @@ public class finishmission : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
+        Debug.Log(" "+bolbook);
         if(bolbook == 4){
             Portal();
         }
