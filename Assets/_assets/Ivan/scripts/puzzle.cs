@@ -6,16 +6,16 @@ using UnityEngine;
 public class puzzle : MonoBehaviour
 {
     [SerializeField]
-    private String tag;
+    private String tagado;
     public finishmission finishmission;
     private void OnTriggerEnter(Collider other) {
-        if(other.CompareTag(tag))
+        if(other.CompareTag(tagado))
         {
             finishmission.GetComponent<finishmission>().bolbook++;
         }
     }
     private void OnTriggerExit(Collider other) {
-        if(other.CompareTag(tag))
+        if(other.CompareTag(tagado))
         {
             finishmission.GetComponent<finishmission>().bolbook--;
         }

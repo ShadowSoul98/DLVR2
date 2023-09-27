@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScenesRelease/Biblioteca.unity
     guid: 94e7008e2b775684394379f4837558fc
+  - enabled: 1
+    path: Assets/Scenes/Cucei.unity
+    guid: 0849f8f3cb278b2429dad06da185167f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 5485741e7125dd84e906f4e292ad25ea, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 8c225ff13a30ba04ea23d8808ab80424, type: 2}
