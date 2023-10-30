@@ -23,7 +23,6 @@ public class stalkerController : MonoBehaviour
     void Update()
     {
         agent.SetDestination(objetive.position);
-            Debug.Log(objetive.position);
         if (!lookPlayer)
         {
             Vector3 distance;

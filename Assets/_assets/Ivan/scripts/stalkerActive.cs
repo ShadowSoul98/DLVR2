@@ -8,7 +8,8 @@ public class stalkerActive : MonoBehaviour
     public Transform start;
     public Transform end;
     public GameObject enemy;
-    public bool actibe = true; 
+    public int wall;
+    public bool actibe = true;
 
     public void activeStalkered(){
         if(actibe){        

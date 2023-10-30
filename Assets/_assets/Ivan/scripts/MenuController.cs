@@ -12,7 +12,6 @@ public class MenuController : MonoBehaviour
     }
     public void ExitBtn()
     {
-        Application.Quit();
-        Debug.Log("exit");
+        SceneManager.LoadScene(0);
     }
 }
