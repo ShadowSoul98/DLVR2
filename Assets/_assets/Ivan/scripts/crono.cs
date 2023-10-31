@@ -7,9 +7,13 @@ using UnityEngine;
 
 public class crono : MonoBehaviour
 {
-    void Start() {
-        //DateTime levelT1 = portal.tiempoResult;
+    public TimeSpan dateTimE;
+    public int segundos;
+    public void SaveTime(TimeSpan timeSpan) {
+        dateTimE = timeSpan;
+        segundos =+ (int)dateTimE.TotalSeconds;
     }
+
     private void Awake() {
         DontDestroyOnLoad(gameObject);
     }

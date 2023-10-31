@@ -11,6 +11,7 @@ TagManager:
   - tag7
   - tag9
   - tag2
+  - Timer
   layers:
   - Default
   - TransparentFX
