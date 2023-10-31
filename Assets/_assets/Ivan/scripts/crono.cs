@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Data.SqlTypes;
 using System.Collections;
 using System;
@@ -7,11 +8,9 @@ using UnityEngine;
 
 public class crono : MonoBehaviour
 {
-    public TimeSpan dateTimE;
-    public int segundos;
-    public void SaveTime(TimeSpan timeSpan) {
-        dateTimE = timeSpan;
-        segundos =+ (int)dateTimE.TotalSeconds;
+    public DateTime tiempoInicial;
+    void Start() {
+        tiempoInicial = DateTime.Now;
     }
 
     private void Awake() {

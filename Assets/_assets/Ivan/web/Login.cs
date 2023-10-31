@@ -25,8 +25,6 @@ public class Login : MonoBehaviour
         string[] data = new string[2];
         data[0] = userInput.text;
         data[1] = passwordInput.text;
-        Debug.Log(userInput.text+": "+data[0]);
-        Debug.Log(passwordInput.text + ": " + data[1]);
         StartCoroutine(server.ServiceConsum("login", data, PosLoader));
         yield return new WaitForSeconds(0.15f);
         yield return new WaitUntil(() => !server.busy);
@@ -38,7 +36,6 @@ public class Login : MonoBehaviour
         switch (server.response.codigo)
         {
             case 204:
-                    Debug.Log(1);
                     errorText.text = "Usuario o contrasena son incorrectos";
                     imLoading.SetActive(true);
                     //print("Usuario o contrasena son incorrectos");
@@ -52,7 +49,6 @@ public class Login : MonoBehaviour
                 errorText.text = "Error datos faltantes";
                 break;
             case 404:
-
                 errorText.text = "No se puede conectar con el servidor";
                 break;
             default:

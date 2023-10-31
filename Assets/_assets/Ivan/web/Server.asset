@@ -22,8 +22,14 @@ MonoBehaviour:
     parameters:
     - username
     - password
+  - name: scoreEdit
+    url: scoreEdit.php
+    parameters:
+    - id
+    - time
+    - score
   busy: 0
   response:
-    codigo: 205
-    mensaje: Inicio de sesion correcta
-    respuesta: '{"id":1,"username":"jorgoniovib","password":"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","imguser":"","level":1}'
+    codigo: 404
+    mensaje: Error Base de datos caida
+    respuesta: 
