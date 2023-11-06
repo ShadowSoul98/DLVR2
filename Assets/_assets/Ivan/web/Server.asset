@@ -28,8 +28,12 @@ MonoBehaviour:
     - id
     - time
     - score
+  - name: scoreCheck
+    url: scoreCheck.php
+    parameters:
+    - id
   busy: 0
   response:
-    codigo: 404
-    mensaje: Error Base de datos caida
-    respuesta: 
+    codigo: 205
+    mensaje: Inicio de sesion correcta
+    respuesta: '{"id":2,"time":00:00:39.000000,"score":39}'

@@ -10,6 +10,7 @@ public class playerProfile : MonoBehaviour
 {
     public Login Login;
     public DBUser DBuser;
+    public DBRanck DBranck;
     public TextMeshProUGUI textMeshPro;
     // Start is called before the first frame update
 
@@ -31,4 +32,11 @@ public class DBUser
     public string password;
     public string imguser;
     public string level;
+}
+
+[Serializable]
+public class DBRanck
+{
+    public int id;
+    public int score;
 }

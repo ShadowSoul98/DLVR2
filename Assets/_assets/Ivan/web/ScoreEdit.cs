@@ -11,21 +11,41 @@ public class ScoreEdit : MonoBehaviour
     public playerProfile profile;
     public crono cron0;
     public TimeSpan tiempo;
+    float tiempoTranscurrido;
     public DateTime tiempoFinal;
+    int score;
     public void FinPartida()
     {
         StartCoroutine(Fin());
     }
-    IEnumerator Fin()
+    public void FinScore()
     {
-        int score = (int)tiempo.TotalSeconds;
-        string[] data = new string[3];
+        StartCoroutine(ScoreCheck());
+    }
+    IEnumerator ScoreCheck()
+    {
+        string[] data = new string[1];
         data[0] = profile.DBuser.id.ToString();
-        data[1] = tiempo.ToString(@"hh\:mm\:ss");
-        data[2] = score.ToString();
-        StartCoroutine(server.ServiceConsum("scoreEdit", data, PosLoader));
+        StartCoroutine(server.ServiceConsum("scoreCheck", data, PosLoader));
         yield return new WaitForSeconds(0.15f);
         yield return new WaitUntil(() => !server.busy);
+    }
+    
+    IEnumerator Fin()
+    {
+        string[] data = new string[3];
+        Debug.Log("id: "+ profile.DBranck.id+"score: "+profile.DBranck.score);        
+        if(profile.DBranck.score <= score){
+            Debug.Log("cambiar puntos");
+            data[0] = profile.DBuser.id.ToString();
+            data[1] = tiempo.ToString(@"hh\:mm\:ss");
+            data[2] = score.ToString();
+            StartCoroutine(server.ServiceConsum("scoreEdit", data, PosLoader));
+            yield return new WaitForSeconds(0.15f);
+            yield return new WaitUntil(() => !server.busy);
+        } else{
+            Debug.Log("no cambio los puntos");
+        }
     }
     public void PosLoader()
     {
@@ -33,6 +53,10 @@ public class ScoreEdit : MonoBehaviour
         {
             case 204:
                 Debug.Log("Usuario o contrasena son incorrectos");
+                break;
+            case 205:
+                profile.DBranck = JsonUtility.FromJson<DBRanck>(server.response.respuesta);
+                FinPartida();
                 break;
             case 206:
                 Debug.Log("Usuario Actualizado "+"Puntos: "+server.response.respuesta);
@@ -54,6 +78,26 @@ public class ScoreEdit : MonoBehaviour
         cron0 = GameObject.FindGameObjectWithTag("Timer").GetComponent<crono>();
         tiempoFinal = DateTime.Now;
         tiempo = tiempoFinal.Subtract(cron0.tiempoInicial);
-        FinPartida();
+        tiempoTranscurrido = (int)tiempo.TotalSeconds;
+        score = CalcularPuntaje(tiempoTranscurrido);
+
+        FinScore();
+        Debug.Log("tiempoFinal: "+tiempo);
+        //FinPartida();
+    }
+    int CalcularPuntaje(float tiempoTranscurrido)
+    {
+        float tiempoMaximo = 60.0f; // Tiempo máximo en segundos
+        int puntajeMaximo = 1000;  // Puntaje máximo
+        int puntajeMinimo = 100;   // Puntaje mínimo
+
+        // Asegurarse de que el tiempo no supere el tiempo máximo
+        tiempoTranscurrido = Mathf.Min(tiempoTranscurrido, tiempoMaximo);
+
+        // Calcular el puntaje inversamente proporcional al tiempo
+        float porcentajeTiempo = tiempoTranscurrido / tiempoMaximo;
+        int puntaje = (int)Mathf.Lerp(puntajeMaximo, puntajeMinimo, porcentajeTiempo);
+
+        return puntaje;
     }
 }
