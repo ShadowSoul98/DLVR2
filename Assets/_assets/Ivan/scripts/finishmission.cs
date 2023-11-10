@@ -8,12 +8,13 @@ public class finishmission : MonoBehaviour
 {
     public int bolbook = 0;
     public List<Light> luz;
+    public int toComplete;
     public Transform puerta,puerta1,newpuerta,newpuerta1;
     public GameObject portal;
     // Start is called before the first frame update
     void Update()
     {
-        if(bolbook == 4){
+        if(bolbook == toComplete){
             Portal();
         }
     }
