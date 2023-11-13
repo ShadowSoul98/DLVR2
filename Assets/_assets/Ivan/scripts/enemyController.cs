@@ -24,7 +24,7 @@ public class enemyController : MonoBehaviour
         Speed = 20f;
     }
     public void unStalkered(){
-        Agent.speed = 0f;
+        Speed = 0f;
         enemy.SetActive(false);
     }
 }
